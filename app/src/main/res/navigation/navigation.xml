@@ -9,5 +9,18 @@
         android:id="@+id/appListFragment"
         android:name="hu.suliprojekt.logtracker.screens.applist.AppListFragment"
         android:label="fragment_app_list"
-        tools:layout="@layout/fragment_app_list" />
+        tools:layout="@layout/fragment_app_list" >
+        <action
+            android:id="@+id/action_appListFragment_to_logListFragment"
+            app:destination="@id/logListFragment"
+            app:popUpTo="@id/appListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/logListFragment"
+        android:name="hu.suliprojekt.logtracker.screens.loglist.LogListFragment"
+        android:label="LogListFragment" >
+        <argument
+            android:name="appName"
+            app:argType="string" />
+    </fragment>
 </navigation>

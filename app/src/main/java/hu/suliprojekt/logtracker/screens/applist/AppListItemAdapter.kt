@@ -1,38 +1,55 @@
 package hu.suliprojekt.logtracker.screens.applist
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import hu.suliprojekt.logtracker.R
-import kotlinx.android.synthetic.main.text_item_view.view.*
+import hu.suliprojekt.logtracker.databinding.TextItemViewBinding
 
-class AppListItemAdapter : RecyclerView.Adapter<AppListItemAdapter.TextItemViewHolder>() {
-
-    class TextItemViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val textView: TextView = itemView.findViewById(R.id.textView)
-    }
-
-    var data = listOf<String>()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+class AppListItemAdapter(val clickListener: AppListItemListener) : ListAdapter<String, AppListItemAdapter.TextItemViewHolder>(AppListDiffCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TextItemViewHolder {
-        val layoutInflater = LayoutInflater.from(parent.context)
-        val view = layoutInflater.inflate(R.layout.text_item_view, parent, false)
-        return TextItemViewHolder(view)
+        return TextItemViewHolder.from(parent)
     }
 
     override fun onBindViewHolder(holder: TextItemViewHolder, position: Int) {
-        val item = data[position]
+        val item = getItem(position)
 
-        holder.textView.text = item
+        holder.bind(item!!, clickListener)
     }
 
-    override fun getItemCount() = data.size
+    class TextItemViewHolder private constructor(val binding: TextItemViewBinding): RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(item: String, clickListener: AppListItemListener) {
+            binding.appName = item
+            binding.clickListener = clickListener
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): TextItemViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = TextItemViewBinding.inflate(layoutInflater, parent, false)
+                return TextItemViewHolder(binding)
+            }
+        }
+    }
+
+}
+
+class AppListDiffCallback : DiffUtil.ItemCallback<String>() {
+
+    override fun areItemsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+    override fun areContentsTheSame(oldItem: String, newItem: String): Boolean {
+        return oldItem == newItem
+    }
+
+}
+
+class AppListItemListener(val clickListener: (appName: String) -> Unit) {
+    fun onClick(appName: String) = clickListener(appName)
 }
