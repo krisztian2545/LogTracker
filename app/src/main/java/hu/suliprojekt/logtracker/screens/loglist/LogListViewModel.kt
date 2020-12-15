@@ -1,4 +1,8 @@
 package hu.suliprojekt.logtracker.screens.loglist
 
-class LogListViewModel {
+import androidx.lifecycle.ViewModel
+
+class LogListViewModel : ViewModel(){
+
+
 }
