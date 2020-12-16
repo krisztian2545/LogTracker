@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="appName"
-            type="java.lang.String" />
+            name="appListItem"
+            type="hu.suliprojekt.logtracker.database.AppListItem" />
         <variable
             name="clickListener"
             type="hu.suliprojekt.logtracker.screens.applist.AppListItemListener" />
@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:onClick="@{() -> clickListener.onClick(appName)}" >
+        android:onClick="@{() -> clickListener.onClick(appListItem)}" >
 
         <TextView
             android:id="@+id/textView"
@@ -27,7 +27,7 @@
             android:paddingEnd="16dp"
             android:paddingBottom="16dp"
             android:textSize="30sp"
-            android:text="@{appName}"/>
+            android:text="@{appListItem.appName}"/>
 
 
     </LinearLayout>

@@ -9,11 +9,14 @@ import androidx.room.Query
 interface LogDetailsDatabaseDao {
 
     @Insert
-    fun insert(log: LogDetails)
+    suspend fun insert(log: LogDetails)
 
     @Query("SELECT * FROM log_detail_table WHERE app_name = :appName")
     fun getAppLogs(appName: String): LiveData<List<LogDetails>>
 
     @Query("DELETE FROM log_detail_table")
-    fun clear()
+    suspend fun clear()
+
+    @Query("DELETE FROM log_detail_table WHERE app_name = :appName")
+    suspend fun clearAppLogs(appName: String)
 }

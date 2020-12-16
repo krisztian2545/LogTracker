@@ -9,12 +9,12 @@ import androidx.room.Query
 interface AppListDatabaseDao {
 
     @Insert
-    fun insert(app: AppListItem)
+    suspend fun insert(app: AppListItem)
 
     @Query("SELECT * FROM app_list_table")
     fun getAllAppNames(): LiveData<List<AppListItem>>
 
     @Query("DELETE FROM app_list_table")
-    fun clear()
+    suspend fun clear()
 
 }

@@ -19,6 +19,7 @@ class LogListFragment : Fragment() {
         val binding = DataBindingUtil.inflate<FragmentLogListBinding>(inflater ,R.layout.fragment_log_list, container, false)
 
         val args = LogListFragmentArgs.fromBundle(requireArguments())
+        // debug
         binding.textView.text = args.appName
 
         return binding.root

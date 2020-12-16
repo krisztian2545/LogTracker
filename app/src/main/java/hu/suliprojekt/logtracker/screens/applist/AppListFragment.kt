@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import hu.suliprojekt.logtracker.R
+import hu.suliprojekt.logtracker.database.AppListDatabase
 import hu.suliprojekt.logtracker.databinding.FragmentAppListBinding
 
 class AppListFragment : Fragment() {
@@ -23,8 +24,14 @@ class AppListFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding = DataBindingUtil.inflate<FragmentAppListBinding>(inflater, R.layout.fragment_app_list, container, false)
 
-        val viewModelFactory = AppListViewModelFactory(listOf<String>("asd", "fu", "poierwer", "qwerty", "zxc", "fuuuuuu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc", "fu", "poierwer", "qwerty", "zxc"))
+        val application = requireNotNull(this.activity).application
+        val database = AppListDatabase.getInstance(application).appListDatabaseDao
+
+        val viewModelFactory = AppListViewModelFactory(database, application)
         val viewModel = ViewModelProvider(this, viewModelFactory).get(AppListViewModel::class.java)
+
+        binding.lifecycleOwner = this
+        binding.appListViewModel = viewModel
 
         val adapter = AppListItemAdapter(AppListItemListener { appName ->
             Toast.makeText(context, appName, Toast.LENGTH_SHORT).show()
