@@ -35,7 +35,7 @@ class LogListViewModel(private val appName: String, dataSource: LogDetailsDataba
 
         //debug
         viewModelScope.launch {
-            insert("mukodj", 64846)
+            insert("mukodjjhdjdjjjkdfksdhfkweyrbfkjhsdbvkuaekuhvaskjdhvbkeuryvkjashdgvkjahdkuvcsakjdvhkajsdvkjsahdfkjsaygdkfsdjf", 64846)
         }
     }
 

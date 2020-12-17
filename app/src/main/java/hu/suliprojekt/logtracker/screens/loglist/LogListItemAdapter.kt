@@ -45,8 +45,7 @@ class LogListDiffCallback : DiffUtil.ItemCallback<LogDetails>() {
     }
 
     override fun areContentsTheSame(oldItem: LogDetails, newItem: LogDetails): Boolean {
-        return (oldItem.message == newItem.message)
-                && (oldItem.time == newItem.time)
+        return oldItem == newItem
     }
 
 }
