@@ -54,6 +54,13 @@ class AppListFragment : Fragment() {
             }
         })
 
+        viewModel.isServerAvailable.observe(viewLifecycleOwner, Observer {
+            if (!it) {
+                Toast.makeText(context, "Failed to connect to the server. Check if you have internet connection.", Toast.LENGTH_LONG).show()
+                viewModel.userNotified()
+            }
+        })
+
         return binding.root
     }
 

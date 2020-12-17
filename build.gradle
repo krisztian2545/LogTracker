@@ -2,6 +2,8 @@
 buildscript {
 
     ext {
+        version_retrofit = "2.9.0"
+        version_moshi = "1.8.0"
         navigationVersion = "2.3.0"
         kotlin_version = "1.4.10"
         archLifecycleVersion = '1.1.1'
