@@ -29,9 +29,6 @@ interface LogApiService {
     @GET("api/log/{appName}")
     suspend fun getAppLogs(@Path("appName") appName: String): List<LogMessage>
 
-    @GET
-    suspend fun getAppLogsFromUrl(@Url url: String): List<LogMessage>
-
 }
 
 object LogApi {

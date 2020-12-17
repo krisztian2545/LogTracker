@@ -26,7 +26,7 @@ class LogListViewModel(private val appName: String, dataSource: LogDetailsDataba
         refreshList()
     }
 
-    private fun getAppListFromServer() {
+    private fun getLogListFromServer() {
         viewModelScope.launch {
             try {
                 val listResult = LogApi.retrofitService.getAppLogs(appName)
@@ -62,7 +62,7 @@ class LogListViewModel(private val appName: String, dataSource: LogDetailsDataba
     }
 
     private fun refreshList() {
-        getAppListFromServer()
+        getLogListFromServer()
     }
 
     private fun serverNotAvailable() {

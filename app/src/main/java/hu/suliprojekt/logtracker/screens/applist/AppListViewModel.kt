@@ -62,6 +62,13 @@ class AppListViewModel(dataSource: AppListDatabaseDao, application: Application)
         }
     }
 
+    fun onRefreshButtonClicked() {
+        refreshList()
+    }
+
+    private fun refreshList() {
+        getAppListFromServer()
+    }
 
     private fun serverNotAvailable() {
         _isServerAvailable.value = false
